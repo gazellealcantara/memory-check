@@ -25,6 +25,12 @@ done
 
 
 # Sending mail if it has a warning or if it is critical
+if [ "$wa" -ge "$cr" ]
+	then
+		echo "Critical should be more than warning percentage"
+		exit 4
+fi
+
 if [ $( printf "%.0f" $PERCENTAGE_USED ) -ge $cr ]
 	then
 		echo | mail -s "$(date '+%Y%m%d %H:%M') memory check - critical" $em
