@@ -33,7 +33,7 @@ fi
 
 if [ $( printf "%.0f" $PERCENTAGE_USED ) -ge $cr ]
 	then
-		echo | mail -s "$(date '+%Y%m%d %H:%M') memory check - critical" $em
+		echo `ps axo %mem,pid,cmd | sort -nr | head | awk '{print $2,$3}'` | mail -s "$(date '+%Y%m%d %H:%M') memory check - critical" $em
 		exit 2
 elif [ $( printf "%.0f" $PERCENTAGE_USED ) -ge "$wa" ]
 	then
